@@ -42,14 +42,16 @@ tr.append(th1,th2,th3);
 thead.append(tr);
 table.append(thead);
 
+// Applying some styling to the body and appending created elements
 document.body.style.textAlign = 'center'
 document.body.append(h1Ele, pELe,mainSection);
 mainSection.append(table);
 
+// Fetching JSON data from a remote URL
 let jsonData = new XMLHttpRequest();
 
 try {
-    //jsonData.open("GET","https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json",true);
+    
     jsonData.open("GET","https://gist.githubusercontent.com/rvsp/add40254aa126f045837fa5b51f47f1f/raw/4d724bfabf4cce7379a386e23bef6576ab99a2f9/pagination.json",true);
     jsonData.send();
     let pageData = [];
@@ -70,6 +72,7 @@ catch (error) {
     console.log(error);
 }
 
+// Function to load the paginated data into the table
 function loadPagination(pageData,page,rows,isLoadButton){
     let firstRecord = (page - 1) * rows;
     let lastRecord = page * rows;
@@ -81,6 +84,7 @@ function loadPagination(pageData,page,rows,isLoadButton){
     }
 }
 
+// Function to create and append table rows and data
 function loadTable(data){
     let tbody = createElement("tbody");
     tbody.setAttribute("id","tablebody");
@@ -95,6 +99,7 @@ function loadTable(data){
     table.append(tbody);
 }
 
+// Function to create and append pagination buttons
 function loadButton(counts){
     const btnsDiv = document.createElement("div");
     btnsDiv.className = 'd-flex justify-content-center';
@@ -140,12 +145,14 @@ function loadButton(counts){
     mainSection.append(btnsDiv);  
 }
 
+// function to create an element with optional text content
 function createElement(elementName,value = ""){
     var element = document.createElement(elementName);
     element.innerHTML = value;
     return element;
 }
 
+// Function to handle the page reload when a pagination button is clicked
 function reload(count){
     refData.page = count;
     let tableBody = document.getElementById("tablebody");
